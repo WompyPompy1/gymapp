@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreakWeek</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div class="header-text">
+          <p class="eyebrow">StreakWeek</p>
+          <h1>Stay consistent, every day.</h1>
+        </div>
+        <button class="icon-button" id="themeToggle" aria-label="Toggle theme">
+          <span aria-hidden="true">🌓</span>
+        </button>
+      </header>
+
+      <section class="hero-card">
+        <div class="hero-graphic" aria-hidden="true"></div>
+        <h2>Workout tracker</h2>
+        <p class="hero-subtitle">Log workouts, protect your streak, and see your week at a glance.</p>
+      </section>
+
+      <section class="summary">
+        <div>
+          <p>Workouts this week</p>
+          <h2 id="weeklyCount">0/7</h2>
+        </div>
+        <div>
+          <p>Current streak</p>
+          <h2 id="currentStreak">0 days</h2>
+        </div>
+        <div>
+          <p>Best streak</p>
+          <h2 id="bestStreak">0 days</h2>
+        </div>
+      </section>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="home">This Week</button>
+        <button class="tab" data-tab="stats">Stats</button>
+      </nav>
+
+      <main>
+        <section id="home" class="tab-panel active">
+          <div class="week-grid" id="weekGrid"></div>
+        </section>
+
+        <section id="stats" class="tab-panel">
+          <div class="card">
+            <h3>Weekly totals</h3>
+            <ul id="weeklyTotals" class="totals-list"></ul>
+          </div>
+
+          <div class="card">
+            <h3>Workout type breakdown</h3>
+            <ul id="typeBreakdown" class="totals-list"></ul>
+          </div>
+
+          <div class="card">
+            <h3>Calendar view</h3>
+            <div id="calendarView" class="calendar"></div>
+          </div>
+
+          <div class="card">
+            <h3>Data</h3>
+            <div class="data-actions">
+              <button class="primary" id="exportData">Export JSON</button>
+              <label class="secondary">
+                Import JSON
+                <input type="file" id="importData" accept="application/json" hidden />
+              </label>
+            </div>
+            <p class="helper">Your data stays on this device unless you export it.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" id="logModal" aria-hidden="true">
+      <div class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+          <div>
+            <p id="modalDate" class="eyebrow"></p>
+            <h2 id="modalTitle">Log day</h2>
+          </div>
+          <button class="icon-button" id="closeModal" aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="toggle-row">
+            <span>Worked out</span>
+            <label class="switch">
+              <input type="checkbox" id="workedOutToggle" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="rest-options" id="restOptions">
+            <label class="radio">
+              <input type="radio" name="restChoice" value="rest" />
+              Rest day
+            </label>
+            <label class="radio">
+              <input type="radio" name="restChoice" value="blank" />
+              Leave blank
+            </label>
+          </div>
+
+          <div id="workoutDetails" class="workout-details">
+            <div class="field">
+              <label for="workoutType">Workout type</label>
+              <select id="workoutType">
+                <option value="">Select</option>
+                <option>Gym weights</option>
+                <option>Cardio</option>
+                <option>Run</option>
+                <option>Cycle</option>
+                <option>Swim</option>
+                <option>Sport</option>
+                <option>Yoga/Mobility</option>
+                <option>Home workout</option>
+                <option>Walk</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="duration">Duration (min)</label>
+                <input type="number" id="duration" min="0" placeholder="45" />
+              </div>
+              <div class="field">
+                <label for="intensity">Intensity (1-5)</label>
+                <input type="number" id="intensity" min="1" max="5" placeholder="3" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="notes">Notes</label>
+              <textarea id="notes" rows="3" placeholder="How did it feel?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="primary" id="saveLog">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
